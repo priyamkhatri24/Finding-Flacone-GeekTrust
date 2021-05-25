@@ -9,6 +9,7 @@ const singlePlanet = (props) => {
   return (
     <div>
       <img
+        alt="planet"
         onClick={props.clicked}
         className={classList.join(" ")}
         src={props.src}

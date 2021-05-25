@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import classes from "./App.module.css";
 import Background from "./components/Background/Background";
 import Planets from "./components/Planets/Planets";
-import spaceshipBox from "./components/SpaceshipsBox/SpaceshipsBox";
 import SpaceshipBox from "./components/SpaceshipsBox/SpaceshipsBox";
 import Result from "./Result/Result";
 import Button from "./UI/Button/Button";
