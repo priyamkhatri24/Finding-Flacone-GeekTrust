@@ -1,5 +1,4 @@
 import ReactDOM from "react-dom";
-process.env.CI = false;
 import "./index.css";
 import App from "./App";
 
