@@ -1,0 +1,31 @@
+.modal {
+  width: 50%;
+  z-index: 500;
+  position: fixed;
+  display: flex;
+  margin: auto;
+  top: 15vh;
+  left: 25%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  transition-duration: 0.3s;
+}
+.modal_not_shown {
+  transform: translateY(-100vh);
+  display: none;
+  opacity: 0;
+}
+
+@media screen and (max-width: 590px) {
+  .modal {
+    width: 90%;
+    left: 15%;
+  }
+}
+@media screen and (max-width: 910px) {
+  .modal {
+    width: 50%;
+    left: 25%;
+  }
+}

@@ -1,0 +1,8 @@
+.planetContainer {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

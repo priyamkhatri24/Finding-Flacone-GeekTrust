@@ -1,0 +1,18 @@
+.question {
+  margin-top: 0px;
+}
+.spaceshipSelectContainer {
+  top: -50px;
+  position: relative;
+  text-align: center;
+}
+.spaceshipName {
+  padding: 10px 30px;
+  border-radius: 50px;
+  width: 400px;
+  color: white;
+  margin: 10px auto;
+  font-size: 15px;
+  background-color: orangered;
+  cursor: pointer;
+}

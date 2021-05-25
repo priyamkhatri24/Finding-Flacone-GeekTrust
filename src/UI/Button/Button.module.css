@@ -1,0 +1,19 @@
+.UIbutton {
+  height: 40px;
+  width: 200px;
+  padding: 20px;
+  margin: 30px;
+  background: linear-gradient(rgba(9, 240, 67), rgba(4, 68, 23));
+  outline: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+.UIbutton:hover {
+  background: linear-gradient(rgba(4, 68, 23), rgba(4, 68, 23));
+}
