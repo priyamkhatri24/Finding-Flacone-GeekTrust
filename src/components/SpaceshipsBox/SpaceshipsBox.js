@@ -17,7 +17,7 @@ const spaceshipBox = (props) => {
         key={ele.name}
         className={spaceshipClass.join(" ")}
       >
-        {ele.name} (Distance: {ele.max_distance}, Speed: {ele.speed})
+        {ele.name} (Max-Distance: {ele.max_distance}, Speed: {ele.speed})
       </p>
     );
   });

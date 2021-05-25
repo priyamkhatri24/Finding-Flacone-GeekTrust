@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from "./App.module.css";
 import Background from "./components/Background/Background";
 import Planets from "./components/Planets/Planets";
+import spaceshipBox from "./components/SpaceshipsBox/SpaceshipsBox";
 import SpaceshipBox from "./components/SpaceshipsBox/SpaceshipsBox";
 import Result from "./Result/Result";
 import Button from "./UI/Button/Button";
@@ -18,6 +19,7 @@ class App extends Component {
     displayResult: false,
     resultMessage: null,
     result: "",
+    timeTaken: null,
   };
   componentDidMount() {
     fetch("https://findfalcone.herokuapp.com/planets")
@@ -35,10 +37,21 @@ class App extends Component {
 
   success = (randomPlanet) => {
     const planets = [...this.state.planets];
+    const spaceships = [...this.state.spaceships];
+    const mapping = { ...this.state.mapping };
+    const reachedSpaceship = mapping[randomPlanet];
 
+    const reachedSpaceshipObect = spaceships.find(
+      (ele) => ele.name === reachedSpaceship
+    );
+    const randomPlanetObject = planets.find((ele) => ele.name === randomPlanet);
+    const timeTaken =
+      randomPlanetObject.distance /
+      (reachedSpaceshipObect.speed * reachedSpaceshipObect.total_no);
     this.setState({
       resultMessage: `Congratulations! Falcone was found in ${randomPlanet}`,
       result: "success",
+      timeTaken: timeTaken,
     });
   };
   failure = () => {
@@ -48,11 +61,10 @@ class App extends Component {
     });
   };
   spaceshipsDeployHandler = () => {
-    // PROBLEM GETTING THE TOKEN (404) - Alternate solution
     const mappedPlanets = Object.keys(this.state.mapping);
-
     if (mappedPlanets.length < 4) return;
 
+    // PROBLEM GETTING THE TOKEN (404) - Alternate solution
     const randomIndex = Math.floor(Math.random() * 6);
     const planets = [...this.state.planets];
     const randomPlanet = planets[randomIndex];
@@ -65,12 +77,27 @@ class App extends Component {
         this.failure();
       }
       this.setState({ displayResult: true });
-      console.log(randomPlanet.name, mappedPlanets);
     }, 2000);
   };
   mappingHandler = (e) => {
     const mapping = { ...this.state.mapping };
-    mapping[this.state.activePlanet] = e.target.getAttribute("name");
+    const selectedSpaceship = e.target.getAttribute("name");
+    const planets = [...this.state.planets];
+    const spaceships = [...this.state.spaceships];
+    const activePlanet = this.state.activePlanet;
+
+    const activePlanetObject = planets.find((ele) => ele.name === activePlanet);
+    const selectedSpaceshipObect = spaceships.find(
+      (ele) => ele.name === selectedSpaceship
+    );
+    if (activePlanetObject.distance > selectedSpaceshipObect.max_distance) {
+      alert(
+        "You cannot select a spaceship whose maximum distance is less than planet's distance."
+      );
+      return;
+    }
+
+    mapping[activePlanet] = selectedSpaceship;
     this.setState({ mapping: mapping });
   };
   removeAssignedSpaceshipHandler = (e) => {
@@ -115,7 +142,11 @@ class App extends Component {
     let modalContent = <Spinner color="orangered" />;
     if (this.state.displayResult) {
       modalContent = (
-        <Result message={this.state.resultMessage} result={this.state.result} />
+        <Result
+          timeTaken={this.state.timeTaken}
+          message={this.state.resultMessage}
+          result={this.state.result}
+        />
       );
     }
     return (

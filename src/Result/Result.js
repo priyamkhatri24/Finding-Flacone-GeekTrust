@@ -9,6 +9,9 @@ const result = (props) => {
     <div className={classes.result}>
       <h1 style={resultClass}>{props.result.toUpperCase()}</h1>
       <h4>{props.message}</h4>
+      {props.timeTaken ? (
+        <h4>Total Time Taken: {props.timeTaken} Units</h4>
+      ) : null}
     </div>
   );
 };
